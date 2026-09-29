@@ -4,18 +4,43 @@ import LayoutsPage from "./Layouts/LayoutsPage";
 const skills = ["Laravel", "PHP", "React JS", "JavaScript", "Tailwind CSS", "MySQL", "REST API", "Git", "Figma", "IT Support"];
 const projects = [
   { number: "01", title: "Inventory Management", type: "Web Application · 2025", description: "Sistem inventori terpusat untuk mengelola stok, transaksi barang, supplier, dan laporan secara real-time.", tags: ["Laravel", "MySQL", "REST API"], variant: "inventory" },
-  { number: "02", title: "Business Dashboard", type: "Dashboard · 2025", description: "Dashboard analitik yang menyederhanakan data kompleks menjadi insight bisnis yang cepat dipahami.", tags: ["React JS", "Tailwind", "Chart API"], variant: "dashboard" },
-  { number: "03", title: "Service Desk System", type: "Internal Tool · 2024", description: "Platform tiket internal untuk mempercepat penanganan kendala IT dengan alur kerja yang terukur.", tags: ["Laravel", "JavaScript", "MySQL"], variant: "service" },
+  { number: "02", title: "Company Profile", type: "Corporate Website · 2025", description: "Website profil perusahaan yang menyampaikan identitas, layanan, pencapaian, dan informasi bisnis secara profesional.", tags: ["React JS", "Tailwind", "Responsive"], variant: "company" },
+  { number: "03", title: "Management Candidate Recruitment Platform", type: "Recruitment Platform · 2025", description: "Platform terpusat untuk mengelola lowongan, data kandidat, tahapan seleksi, jadwal interview, dan laporan rekrutmen.", tags: ["Laravel", "React JS", "MySQL"], variant: "recruitment" },
+  { number: "04", title: "Wedding Website", type: "Digital Invitation · 2025", description: "Undangan pernikahan digital dengan cerita pasangan, detail acara, galeri, lokasi, hitung mundur, dan konfirmasi kehadiran.", tags: ["React JS", "Tailwind", "RSVP"], variant: "wedding" },
+  { number: "05", title: "Travel, Booking & Event", type: "Booking Platform · 2025", description: "Platform pencarian destinasi, akomodasi, pengalaman, dan event dengan alur pemesanan yang praktis.", tags: ["Laravel", "React JS", "Payment API"], variant: "travel" },
+  { number: "06", title: "News Portal", type: "Media Platform · 2025", description: "Portal berita responsif dengan kategori, breaking news, artikel unggulan, pencarian, dan pembaruan informasi terkini.", tags: ["Laravel", "MySQL", "REST API"], variant: "news" },
+  { number: "07", title: "AI Website & App", type: "AI Application · 2026", description: "Aplikasi AI terpadu untuk percakapan, pembuatan konten, analisis dokumen, rangkuman, dan text-to-speech.", tags: ["React JS", "AI API", "Text to Speech"], variant: "ai-app" },
+  { number: "08", title: "Custom Website", type: "Bespoke Development · 2026", description: "Website khusus yang dirancang dari kebutuhan bisnis, identitas visual, fitur, hingga integrasi sistem yang dibutuhkan.", tags: ["Laravel", "React JS", "Custom API"], variant: "custom" },
 ];
+
+const projectImages = {
+  inventory: ["inventory-management-dashboard.png", "Dashboard Inventory Management dengan ringkasan stok, grafik transaksi, kategori barang, dan status supplier"],
+  dashboard: ["business-dashboard.png", "Business Dashboard dengan metrik performa, tren pendapatan, aktivitas pelanggan, dan transaksi terbaru"],
+  service: ["service-desk-system.png", "Service Desk System dengan antrean tiket, status prioritas, pemantauan SLA, dan analitik layanan IT"],
+  company: ["company-profile-website.png", "Website Company Profile dengan layanan, statistik perusahaan, profil singkat, dan tombol kontak"],
+  recruitment: ["candidate-recruitment-platform.png", "Dashboard rekrutmen dengan statistik kandidat, pipeline seleksi, analitik, dan jadwal interview"],
+  wedding: ["wedding-website.png", "Website pernikahan dengan informasi pasangan, jadwal acara, lokasi, galeri, dan RSVP"],
+  travel: ["travel-booking-event-platform.png", "Platform travel, booking, dan event dengan pencarian destinasi, harga, rating, serta ringkasan pemesanan"],
+  news: ["news-portal.png", "Portal berita dengan breaking news, artikel utama, berita terbaru, topik, dan konten populer"],
+  "ai-app": ["ai-website-app.png", "Aplikasi AI dengan chatbot, analisis dokumen, pembuat konten, dan text-to-speech"],
+  "ai-integration": ["ai-integration-platform.png", "Dashboard integrasi AI dengan workflow, provider model, keamanan API, penggunaan, biaya, dan latensi"],
+  "three-d": ["3d-website.png", "Website 3D interaktif dengan visualisasi dan konfigurator produk sepeda motor listrik"],
+  custom: ["custom-website.png", "Custom website dengan desain modular, layanan, proyek unggulan, statistik, proses, dan ajakan kerja sama"],
+};
 
 function ArrowIcon() { return <span aria-hidden="true">↗</span>; }
 
 function ProjectVisual({ variant }) {
-  if (variant === "inventory") return (
-    <div className="project-mockup inventory-ui" aria-hidden="true">
-      <div className="mock-sidebar"><b>F.</b><i /><i /><i /><i /></div>
-      <div className="mock-main"><div className="mock-top"><span>Overview</span><em /></div><div className="stat-row"><i /><i /><i /></div><div className="chart-card"><span /><span /><span /><span /><span /><span /></div></div>
-    </div>
+  const image = projectImages[variant];
+  if (image) return (
+    <img
+      className="project-image"
+      src={`/assets/images/${image[0]}`}
+      alt={image[1]}
+      width="1536"
+      height="1024"
+      loading="lazy"
+    />
   );
   if (variant === "dashboard") return (
     <div className="project-mockup dashboard-ui" aria-hidden="true">
@@ -38,7 +63,7 @@ export default function Home() {
     const subject = encodeURIComponent(`Kolaborasi dari ${data.get("name")}`);
     const body = encodeURIComponent(`Nama: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`);
     setMessageSent(true);
-    window.location.href = `mailto:flandyrockyliano@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:flandydev@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -96,7 +121,7 @@ export default function Home() {
       <section id="kontak" className="contact light-section section-pad">
         <div className="section-kicker">05 / Kontak</div>
         <div className="contact-grid">
-          <div className="contact-copy"><p className="eyebrow dark"><i /> Punya proyek menarik?</p><h2>MARI BUAT<br />SESUATU YANG<br /><span>BERARTI.</span></h2><p>Terbuka untuk kolaborasi, proyek freelance, dan kesempatan kerja. Ceritakan ide Anda—saya siap membantu mewujudkannya.</p><a href="mailto:flandyrockyliano@gmail.com">flandyrockyliano@gmail.com <ArrowIcon /></a></div>
+          <div className="contact-copy"><p className="eyebrow dark"><i /> Punya proyek menarik?</p><h2>MARI BUAT<br />SESUATU YANG<br /><span>BERARTI.</span></h2><p>Terbuka untuk kolaborasi, proyek freelance, dan kesempatan kerja. Ceritakan ide Anda—saya siap membantu mewujudkannya.</p><a href="mailto:flandydev@gmail.com">flandydev@gmail.com <ArrowIcon /></a></div>
           <form className="contact-form" onSubmit={handleContact}><label>Nama<input name="name" type="text" placeholder="Nama lengkap Anda" minLength="2" maxLength="80" required /></label><label>Email<input name="email" type="email" placeholder="nama@email.com" maxLength="120" required /></label><label>Pesan<textarea name="message" placeholder="Ceritakan tentang proyek Anda..." minLength="10" maxLength="1500" rows="5" required /></label><button type="submit">Kirim pesan <ArrowIcon /></button>{messageSent && <p className="form-note" role="status">Aplikasi email Anda sedang dibuka.</p>}</form>
         </div>
       </section>

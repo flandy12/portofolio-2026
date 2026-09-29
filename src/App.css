@@ -69,6 +69,15 @@
 .project-visual.inventory { background: #242d28; }
 .project-visual.dashboard { background: #d6cfb7; }
 .project-visual.service { background: #d9b83f; }
+.project-visual.company { background: #cbc8be; }
+.project-visual.recruitment { background: #20231f; }
+.project-visual.wedding { background: #d8d0c3; }
+.project-visual.travel { background: #2874a0; }
+.project-visual.news { background: #dedbd1; }
+.project-visual.ai-app, .project-visual.ai-integration, .project-visual.three-d { background: #151816; }
+.project-visual.custom { background: #d3d0c7; }
+.project-image { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease; }
+.project-card:hover .project-image { transform: scale(1.025); }
 .project-mockup { width: 78%; height: 72%; background: #f6f5ef; color: #1c201d; border-radius: 5px; box-shadow: 0 25px 55px rgba(0,0,0,.27); transform: rotate(-2.5deg); transition: .45s ease; overflow: hidden; }
 .project-card:hover .project-mockup { transform: rotate(0) scale(1.025); }
 .inventory-ui { display: flex; }
