@@ -13,9 +13,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    const onResize = () => {
+      if (window.innerWidth > 900) setOpen(false);
+    };
+
+    document.body.classList.toggle("menu-is-open", open);
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      document.body.classList.remove("menu-is-open");
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
+
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
-      <a className="brand" href="#beranda" aria-label="Kembali ke beranda">FR<span>.</span></a>
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`}>
+      <a className="brand" href="#beranda" aria-label="Kembali ke beranda" onClick={() => setOpen(false)}>FR<span>.</span></a>
       <button className="menu-button" type="button" aria-label={open ? "Tutup menu" : "Buka menu"} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen((value) => !value)}>
         <span /><span />
       </button>
