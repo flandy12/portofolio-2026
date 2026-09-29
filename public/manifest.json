@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Flandy Portfolio",
+  "name": "Flandy Rockyliano Mamun - Full Stack Developer",
+  "description": "Portofolio Full Stack Developer yang berfokus pada Laravel, React, REST API, MySQL, dan IT support.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,9 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#111311",
+  "background_color": "#111311",
+  "lang": "id-ID",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "technology"]
 }
