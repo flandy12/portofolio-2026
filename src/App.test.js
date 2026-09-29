@@ -1,8 +1,10 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("menampilkan identitas dan navigasi utama portofolio", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /membangun pengalaman digital/i })).toBeInTheDocument();
+  expect(screen.getByRole("navigation", { name: /navigasi utama/i })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: /selected work/i })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: /kirim pesan/i })).toBeInTheDocument();
 });
