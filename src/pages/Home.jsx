@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LayoutsPage from "./Layouts/LayoutsPage";
 
 const skills = [
@@ -86,6 +86,15 @@ const projects = [
     tags: ["Laravel", "React JS", "Custom API"],
     variant: "custom",
   },
+  {
+    number: "09",
+    title: "AI Photobooth",
+    type: "AI Creative Platform Â· 2026",
+    description:
+      "Photobooth berbasis AI untuk mengambil foto, memilih gaya visual dan latar, menghasilkan variasi potret, serta mengunduh hasil secara instan.",
+    tags: ["React JS", "AI API", "Computer Vision"],
+    variant: "ai-photobooth",
+  },
 ];
 
 const projectImages = {
@@ -129,6 +138,10 @@ const projectImages = {
     "ai-integration-platform.png",
     "Dashboard integrasi AI dengan workflow, provider model, keamanan API, penggunaan, biaya, dan latensi",
   ],
+  "ai-photobooth": [
+    "ai-photobooth.png",
+    "AI Photobooth dengan pratinjau kamera, pilihan gaya visual dan backdrop, countdown, serta strip hasil foto",
+  ],
   "three-d": [
     "3d-website.png",
     "Website 3D interaktif dengan visualisasi dan konfigurator produk sepeda motor listrik",
@@ -137,6 +150,63 @@ const projectImages = {
     "custom-website.png",
     "Custom website dengan desain modular, layanan, proyek unggulan, statistik, proses, dan ajakan kerja sama",
   ],
+};
+
+const caseStudyDetails = {
+  inventory: {
+    challenge: "Data stok dan transaksi tersebar sehingga pengecekan ketersediaan barang serta penyusunan laporan memerlukan waktu lama.",
+    solution: "Membangun sistem inventori terpusat dengan pencatatan transaksi, pengelolaan supplier, kontrol stok, dan laporan yang saling terhubung.",
+    features: ["Dashboard stok real-time", "Riwayat barang masuk dan keluar", "Manajemen supplier", "Laporan dan filter periode"],
+    outcome: "Proses pencatatan lebih konsisten, pencarian data lebih cepat, dan risiko selisih stok dapat dikurangi.",
+  },
+  company: {
+    challenge: "Informasi perusahaan belum tersusun dalam kanal digital yang profesional, mudah dipahami, dan nyaman diakses dari berbagai perangkat.",
+    solution: "Merancang company profile responsif dengan hierarki konten yang jelas, identitas visual konsisten, dan alur menuju kontak yang ringkas.",
+    features: ["Profil dan layanan perusahaan", "Pencapaian dan statistik", "Tampilan responsif", "Integrasi formulir kontak"],
+    outcome: "Perusahaan memiliki presentasi digital yang lebih kredibel dan calon pelanggan lebih mudah menemukan informasi penting.",
+  },
+  recruitment: {
+    challenge: "Data kandidat, tahapan seleksi, dan jadwal interview dikelola terpisah sehingga progres rekrutmen sulit dipantau.",
+    solution: "Menyatukan seluruh proses rekrutmen dalam dashboard berbasis peran dengan pipeline kandidat dan status yang terukur.",
+    features: ["Manajemen lowongan", "Pipeline kandidat", "Jadwal interview", "Analitik rekrutmen"],
+    outcome: "Tim HR dapat memantau kandidat dari satu tempat dan mempercepat koordinasi pada setiap tahap seleksi.",
+  },
+  wedding: {
+    challenge: "Pasangan membutuhkan undangan yang personal sekaligus praktis untuk membagikan informasi acara dan menerima konfirmasi tamu.",
+    solution: "Membuat undangan digital mobile-first dengan cerita pasangan, detail acara, lokasi, galeri, dan RSVP dalam satu pengalaman.",
+    features: ["Hitung mundur acara", "Galeri pasangan", "Peta lokasi", "Formulir RSVP"],
+    outcome: "Informasi acara lebih mudah dibagikan dan data kehadiran tamu dapat dikumpulkan secara lebih rapi.",
+  },
+  travel: {
+    challenge: "Pengguna membutuhkan cara cepat untuk menemukan destinasi, membandingkan pilihan, dan menyelesaikan pemesanan.",
+    solution: "Merancang alur pencarian dan booking terpadu dengan filter, detail produk, ringkasan pesanan, dan integrasi pembayaran.",
+    features: ["Pencarian dan filter", "Detail destinasi dan event", "Ringkasan pemesanan", "Integrasi pembayaran"],
+    outcome: "Alur pemesanan menjadi lebih singkat dan informasi yang dibutuhkan pengguna tersedia pada setiap tahap keputusan.",
+  },
+  news: {
+    challenge: "Konten berita perlu disajikan dengan cepat tanpa kehilangan kemudahan navigasi pada banyak kategori dan artikel.",
+    solution: "Membangun portal berita responsif dengan struktur kategori, pencarian, konten unggulan, dan sistem pengelolaan artikel.",
+    features: ["Breaking news", "Kategori dan pencarian", "Artikel unggulan", "Panel manajemen konten"],
+    outcome: "Editor dapat memperbarui informasi secara efisien dan pembaca lebih mudah menemukan berita yang relevan.",
+  },
+  "ai-app": {
+    challenge: "Berbagai kebutuhan AI biasanya tersebar di beberapa layanan dengan alur dan pengalaman yang berbeda.",
+    solution: "Menggabungkan percakapan AI, pembuatan konten, analisis dokumen, rangkuman, dan suara dalam satu aplikasi.",
+    features: ["AI chat", "Analisis dokumen", "Content generator", "Text-to-speech"],
+    outcome: "Pengguna dapat menyelesaikan beberapa jenis pekerjaan berbasis AI tanpa berpindah platform.",
+  },
+  custom: {
+    challenge: "Kebutuhan bisnis yang spesifik tidak selalu dapat dipenuhi secara optimal oleh template atau produk siap pakai.",
+    solution: "Menerjemahkan kebutuhan menjadi arsitektur, antarmuka, fitur, dan integrasi khusus yang dapat dikembangkan bertahap.",
+    features: ["Analisis kebutuhan", "Desain modular", "Custom API", "Integrasi sistem"],
+    outcome: "Produk digital lebih selaras dengan proses bisnis dan tetap fleksibel untuk pengembangan berikutnya.",
+  },
+  "ai-photobooth": {
+    challenge: "Photobooth konvensional menawarkan variasi visual terbatas dan proses pengambilan hingga penyimpanan foto yang kurang personal.",
+    solution: "Membangun pengalaman photobooth berbasis AI yang menggabungkan kamera, pemilihan gaya, transformasi latar, dan hasil foto instan.",
+    features: ["Live camera preview", "AI style transformation", "Pilihan backdrop", "Countdown dan auto capture", "Photo strip dan download"],
+    outcome: "Pengguna dapat membuat hasil foto yang unik dalam alur singkat, intuitif, dan siap dibagikan.",
+  },
 };
 
 function ArrowIcon() {
@@ -198,8 +268,76 @@ function ProjectVisual({ variant }) {
   );
 }
 
+function CaseStudyModal({ project, onClose }) {
+  if (!project) return null;
+
+  const detail = caseStudyDetails[project.variant];
+
+  return (
+    <div className="case-study-overlay" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
+      <article className="case-study-modal" role="dialog" aria-modal="true" aria-labelledby="case-study-title">
+        <button className="case-study-close" type="button" onClick={onClose} aria-label="Tutup studi kasus" autoFocus>
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div className={`case-study-hero ${project.variant}`}>
+          <ProjectVisual variant={project.variant} />
+        </div>
+        <div className="case-study-content">
+          <p className="case-study-label">Studi Kasus / {project.number}</p>
+          <h2 id="case-study-title">{project.title}</h2>
+          <p className="case-study-lead">{project.description}</p>
+          <div className="case-study-grid">
+            <section>
+              <span>01 / Tantangan</span>
+              <p>{detail.challenge}</p>
+            </section>
+            <section>
+              <span>02 / Solusi</span>
+              <p>{detail.solution}</p>
+            </section>
+            <section>
+              <span>03 / Fitur utama</span>
+              <ul>
+                {detail.features.map((feature) => <li key={feature}>{feature}</li>)}
+              </ul>
+            </section>
+            <section>
+              <span>04 / Hasil</span>
+              <p>{detail.outcome}</p>
+            </section>
+          </div>
+          <div className="case-study-footer">
+            <div className="tag-list">
+              {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
+            </div>
+            <a href="#kontak" onClick={onClose}>Diskusikan proyek serupa <ArrowIcon /></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
 export default function Home() {
   const [messageSent, setMessageSent] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setSelectedProject(null);
+    };
+
+    document.body.classList.add("case-study-is-open");
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.classList.remove("case-study-is-open");
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
+
   const handleContact = (event) => {
     event.preventDefault();
 
@@ -422,9 +560,9 @@ ${name}
                     <span key={tag}>{tag}</span>
                   ))}
                 </div>
-                <a href="#kontak">
+                <button type="button" onClick={() => setSelectedProject(project)}>
                   Lihat studi kasus <ArrowIcon />
-                </a>
+                </button>
               </div>
             </article>
           ))}
@@ -531,6 +669,7 @@ ${name}
         <p>© 2026 Flandy Rockyliano. Dibuat dengan detail dan dedikasi.</p>
         <a href="#beranda">Kembali ke atas ↑</a>
       </footer>
+      <CaseStudyModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </LayoutsPage>
   );
 }
